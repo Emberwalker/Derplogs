@@ -2,7 +2,7 @@ package com.hacktheburgh.commlog.actors
 
 import akka.actor.{ActorRef, Actor}
 import akka.event.Logging
-import com.hacktheburgh.commlog.messages.Commit
+import com.hacktheburgh.commlog.actors.messages.Commit
 
 /**
  * WebSocket handler actor for pushing JSON to clients.

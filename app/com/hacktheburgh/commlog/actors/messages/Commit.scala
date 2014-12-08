@@ -1,4 +1,4 @@
-package com.hacktheburgh.commlog.messages
+package com.hacktheburgh.commlog.actors.messages
 
 import play.api.libs.json.Json
 
