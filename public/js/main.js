@@ -3,16 +3,48 @@
 var Display = function() {
     // used for display logic
 
-    var list = document.getElementById('list');
+    var list = $('#list');
 
     var process = function(msg, repo, committer) {
         //do more stuff here
         log(msg, 'INFO');
+        var container = $('<li>');
+        var row_div = $('<div>').addClass('row');
+        var inner_div = $('<div>').addClass('col-md-12');
+        var blockquote = $('<blockquote>');
+        var strong = $('<strong>').append(committer).append($('<br>'));
+        var em = $('<em>').append(msg);
+        var code = $('<code>').css('float','right').append(msg);
+        container.append(row_div.append(inner_div.append(blockquote.append(strong, em, code))));
+        container.hide().prependTo(list).show('slow');
     }
 
     return {
         newLog: function(msg, repo, committer) {
             process(msg, repo, committer);
+        }
+    }
+}
+var Stack = function() {
+    var d = Display();
+    var stack = [];
+
+    var _push = function(obj) {
+        stack.unshift(obj);
+    }
+
+    var _pop = function() {
+        if (stack.length !== 0) {
+            var tmp = stack.pop();
+            d.newLog(tmp.msg, tmp.repo, tmp.committer);
+        }
+    }
+
+    setInterval(_pop, 1000);
+
+    return {
+        push: function(obj) {
+            _push(obj);
         }
     }
 }
@@ -28,13 +60,13 @@ var Ws = function(uri) {
         log('message recieved', 'INFO');
         var data = JSON.parse(evt.data);
         log(JSON.stringify(data), 'DEBUG');
-        d.newLog(data.msg, data.repo, data.committer);
+        s.push(data);
     }
     var onError = function(evt) {
         log('connection error', 'ERROR');
     }
 
-    var d = Display();
+    var s = Stack();
     var ws = new WebSocket(uri);
     ws.onopen = function(evt ) { onOpen(evt); }
     ws.onclose = function(evt ) { onClose(evt); }
@@ -49,6 +81,10 @@ var Ws = function(uri) {
     }
 }
 
-var wsUri = 'ws://188.226.165.41:9000/socket';
-var w = Ws(wsUri);
-
+var x;
+window.onload = function() {
+    console.log('done');
+    var wsUri = 'ws://188.226.165.41:9000/socket';
+    var w = Ws(wsUri);
+    x = w;
+}
