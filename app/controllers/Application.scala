@@ -13,6 +13,10 @@ object Application extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
+  def log = Action {
+    Ok(views.html.log)
+  }
+
   def socket = WebSocket.acceptWithActor[String, String] { request => out =>
     Props(new SocketActor(out))
   }
