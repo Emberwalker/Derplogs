@@ -1,7 +1,27 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("Home") {
 
-    @play20.welcome(message)
+    <div class="jumbotron top-header">
+        <h1>Commlogs</h1>
+        <p>Starlogs for hackathons.</p><br/>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-left">
+            <h1>Live</h1>
+            <p>Watch the commits, Starlogs style.</p>
+            <a href="/assets/log.html"><button class="btn btn-danger">
+                <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+            </button></a>
+        </div>
+        <div class="col-md-6 col-md-right">
+            <h1>Configure</h1>
+            <p>List, add and remove repositories from the socket.</p>
+            <a href="/config"><button class="btn btn-danger">
+                <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+            </button></a>
+        </div>
+    </div>
 
 }

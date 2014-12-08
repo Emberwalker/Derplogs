@@ -1,0 +1,26 @@
+/*!
+ * Commlogs
+ * Darkly/Bootstrap Overrides
+ */
+
+.navbar {
+    background-color: #ED6550;
+}
+
+.col-md-left {
+    text-align: right;
+}
+
+.top-header {
+    margin-top: 7em;
+}
+
+.panel-success > .panel-heading {
+    background-color: #14803B;
+    border-color: #14803B;
+}
+
+.jumbotron {
+    background: url("/assets/img/arthurs-seat.jpg") center;
+    opacity: 50;
+}
