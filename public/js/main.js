@@ -14,7 +14,7 @@ var Display = function() {
         var blockquote = $('<blockquote>');
         var strong = $('<strong>').append(committer).append($('<br>'));
         var em = $('<em>').append(msg);
-        var code = $('<code>').css('float','right').append(msg);
+        var code = $('<code>').css('float','right').append(repo);
         container.append(row_div.append(inner_div.append(blockquote.append(strong, em, code))));
         container.hide().prependTo(list).show('slow');
     }
