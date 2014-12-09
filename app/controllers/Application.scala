@@ -10,11 +10,15 @@ import com.hacktheburgh.commlog.actors.SocketActor
 object Application extends Controller {
 
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok(views.html.index())
   }
 
   def log = Action {
-    Ok(views.html.log)
+    Ok(views.html.log())
+  }
+
+  def starlog = Action {
+    Ok(views.html.stars())
   }
 
   def socket = WebSocket.acceptWithActor[String, String] { request => out =>

@@ -15,9 +15,9 @@ class SocketActor(out: ActorRef) extends Actor {
 
   override def receive = {
     case x:Commit =>
-      log.warning(s"Unimplemented; got commit $x")
       out ! x.json
     case x:String =>
+      // TODO: Remove me. Catch-and-ignore to avoid dead-letter warnings.
       log.warning("Sending test payload.")
       context.self ! new Commit("Test commit message", "Emberwalker/derplogs", "Emberwalker")
   }
