@@ -3,11 +3,17 @@
 # ~~~~
 
 # Home page
-GET        /                    controllers.Application.index
-GET        /socket              controllers.Application.socket
-GET        /log                 controllers.Application.log
-GET        /starlogs            controllers.Application.starlog
+GET         /                    controllers.Application.index
+GET         /socket              controllers.Application.socket
+GET         /log                 controllers.Application.log
+GET         /starlogs            controllers.Application.starlog
+
+# GitHub ingest
+POST        /github/ingest       controllers.Application.ingest
+
+# Debug helpers
+POST        /hub/*path           controllers.Application.yesMan(path)
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file        controllers.Assets.at(path="/public", file)
 

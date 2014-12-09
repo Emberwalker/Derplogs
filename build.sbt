@@ -14,7 +14,8 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.roundeights" %% "hasher" % "1.0.0"
+  "com.roundeights" %% "hasher" % "1.0.0",
+  "net.databinder.dispatch" %% "dispatch-core" % "0.11.2"
 )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
