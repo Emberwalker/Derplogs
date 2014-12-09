@@ -1,9 +1,14 @@
 package com.hacktheburgh.commlog.internal
 
+import java.nio.charset.StandardCharsets
+import java.nio.file.{Paths, Files}
+
 import scala.collection.mutable
 
+import play.api.libs.json.Json
+
 import controllers.Application.psAgent
-import com.hacktheburgh.commlog.internal.containers.Repo
+import com.hacktheburgh.commlog.internal.containers.Repo, Repo._
 import com.hacktheburgh.commlog.github.{Unsubscribe, Subscribe}
 
 /**
@@ -30,6 +35,11 @@ object RepoManager {
     repoList foreach (psAgent ! Unsubscribe(_))
     repoList = new mutable.MutableList[Repo]
     list map addRepo
+  }
+
+  def writeToDisk() {
+    val json = Json.stringify(Json.toJson(repoList))
+    Files.write(Paths.get("conf/repos.json"), json.getBytes(StandardCharsets.UTF_8))
   }
 
 }

@@ -7,7 +7,7 @@ import dispatch.{Http, Req, url, Defaults}, Defaults._
 import play.api.Logger
 import com.roundeights.hasher.Implicits._
 
-import com.hacktheburgh.commlog.internal.{Configuration, RepoManager}
+import com.hacktheburgh.commlog.internal.{DiskConfiguration, RepoManager}
 import com.hacktheburgh.commlog.internal.containers.Repo
 
 /**
@@ -17,7 +17,7 @@ import com.hacktheburgh.commlog.internal.containers.Repo
  */
 class PubSubAgent extends Actor {
 
-  private val GITHUB_HUB_ENDPOINT = if (Configuration.isDebugEnv) "http://localhost:9000/hub" else "https://api.github.com/hub"
+  private val GITHUB_HUB_ENDPOINT = if (DiskConfiguration.isDebugEnv) "http://localhost:9000/hub" else "https://api.github.com/hub"
 
   // This secret has to persist for the whole session
   private val sekrit:String = Random.nextString(16).md5
@@ -28,7 +28,7 @@ class PubSubAgent extends Actor {
     url(GITHUB_HUB_ENDPOINT)
       .POST
       .addParameter("hub.topic", s"https://github.com/${repo.user}/${repo.repo}/events/push")
-      .addParameter("hub.callback", s"${Configuration.getRootURL}/github/ingest")
+      .addParameter("hub.callback", s"${DiskConfiguration.getRootURL}/github/ingest")
       .addParameter("hub.secret", sekrit)
 
   // See https://developer.github.com/v3/repos/hooks/#pubsubhubbub

@@ -8,8 +8,11 @@ import play.libs.Akka
 
 import com.hacktheburgh.commlog.actors.SocketActor
 import com.hacktheburgh.commlog.github.PubSubAgent
+import com.hacktheburgh.commlog.internal.DiskConfiguration
 
 object Application extends Controller {
+
+  DiskConfiguration.loadConfig()
 
   // Our PubSubHubbub ActorRef. Important for a few components, espectially the RepoManager.
   val psAgent = Akka.system().actorOf(Props(new PubSubAgent()), "pubsubhubbub-agent")
